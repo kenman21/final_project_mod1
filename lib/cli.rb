@@ -2,24 +2,18 @@ require_relative 'cli_search'
 require 'pry'
 
 def run
-  user_input = ""
-  while user_input
-    start_award
-    user_input = gets.downcase.strip
-    case user_input
-    when "search"
-      run_search
-      break
-    when "trivia"
-      trivia
-    when "random fact"
-      random_fact
-    when "exit"
-      exit_award
-      break
-    # else
-    #   start_award
-    end
+  start_award
+  user_input = gets.downcase.strip
+  if user_input == "search"
+    run_search
+  elsif user_input == "trivia"
+    trivia
+  elsif user_input == "random fact"
+    random_fact
+  elsif user_input == "exit"
+    exit_award
+  else puts "That's not a valid command. Please try again."
+    run
   end
 end
 
@@ -31,6 +25,3 @@ end
 def exit_award
   puts "Goodbye!"
 end
-
-run
-"puts hi"
