@@ -1,10 +1,7 @@
 class Nominee < ActiveRecord::Base
 
   has_many :nominations
-  has_many :movies, through: :nominations 
-
-  def nominations
-  end
+  has_many :movies, through: :nominations
 
   def wins
   end
