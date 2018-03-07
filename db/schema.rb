@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.string  "category_name"
     t.integer "year"
     t.integer "win"
-    t.integer "actor_id"
+    t.integer "nominee_id"
     t.integer "movie_id"
   end
 
