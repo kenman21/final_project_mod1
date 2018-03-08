@@ -1,4 +1,6 @@
 require_relative 'cli_search'
+require_relative 'trivia'
+require_relative 'random_fact'
 require 'pry'
 
 def run
@@ -7,7 +9,7 @@ def run
   if user_input == "search"
     run_search
   elsif user_input == "trivia"
-    trivia
+    start_trivia
   elsif user_input == "random fact"
     random_fact
   elsif user_input == "exit"
