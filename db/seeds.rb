@@ -37,7 +37,7 @@ aa_norm.each do |award|
     else
       m_id = Movie.all.where(name: award[4]).first.id
     end
-  end 
-  nomination = Nomination.create(category_name: award[2], year: award[0], win: award[3], nominee_id: n_id, movie_id: m_id )
+  end
+  nomination = Nomination.create(category_name: award[2], ceremony: award[1], year: award[0], win: award[3], nominee_id: n_id, movie_id: m_id )
   count += 1
 end
