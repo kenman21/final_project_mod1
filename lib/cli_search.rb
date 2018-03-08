@@ -29,7 +29,7 @@ def name
   user_input = gets.downcase.chomp
   #if database does not include name :
     puts "Please enter a valid name."
-  else
+  # else
     #return all wins and nominations for person
 end
 
@@ -38,7 +38,7 @@ def movie
   user_input = gets.downcase.chomp
   #if database does not include name:
     puts "Please enter a valid movie name."
-  else
+  # else
     #return all wins and nominations for person
 end
 
@@ -65,7 +65,15 @@ end
 
 def category
   puts "Please enter the category you would like to see:\n"
+  show_category
+  user_input = gets.downcase.chomp
+  puts "Here is a list of every winner and nominee for the selected category:"
+  #return list of winners and nominees for selected category
+  run_search
+  binding.pry
+end
 
+def show_category
   category = []
   Nomination.all.each do |nom|
     if category.include?(nom.category_name)
@@ -74,33 +82,8 @@ def category
       category << nom.category_name
     end
   end
-  category.sort
-  binding.pry
-
+  category.sort.each {|name| puts "#{name}\n"}
 end
-  # puts "Actor\n"
-  # puts "Actress\n"
-  # puts "Art Direction\n"
-  # puts "Assistant Director\n"
-  # puts "Cinematography\n"
-  # puts "Directing\n"
-  # puts "Engineering Effects\n"
-  # puts "Film Editing\n"
-  # puts "Music (Scoring)\n"
-  # puts "Music (Song)\n"
-  # puts "Outstanding Picture\n"
-  # puts "Outstanding Production\n"
-  # puts "Short Subject (Cartoon)\n"
-  # puts "Short Subject (Comedy)\n"
-  # puts "Short Subject (Novelty)\n"
-  # puts "Sound Recording\n"
-  # puts "Special Award\n"
-  # puts "Unique and Artistic Picture\n"
-  # puts "Writing\n"
-  # puts
-
-
-
 
 def search
   puts "What would you like to search by?\n"
