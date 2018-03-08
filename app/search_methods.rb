@@ -31,19 +31,16 @@ def n_print_wins(name)
   uw.each do |win|
     string = string + "Best #{win} #{awc.count(win)} time(s)\n"
   end
-  n_occurances(name).movies.each {|movie| string2 << "#{movie.name}\n"}
-  puts "#{name} has been nominated #{no.nominations.size} time(s) and has won #{awc.size} time(s)"
+  n_occurances(name).movies.each {|movie| string2 << "#{movie.name} (#{Nomination.all.where(movie: movie.id).take.year})\n"}
+  puts "#{name} has been nominated #{no.nominations.size} time(s) and has won #{awc.size} time(s)."
+  puts
   puts "#{name} has won the awards for:"
+  puts
   puts string
+  puts
   puts "His/her list of nominated movies includes:"
+  puts
   puts string2
-end
-
-def n_movies_wins(name)
-  n_all_wins()
-end
-
-def n_print_movies
 end
 
 #Retrieve all Movie entries matching the (name) entered by the User.
@@ -75,7 +72,54 @@ def m_print_wins(name)
   uw.each do |win|
     string = string + "Best #{win}\n"
   end
-  puts "#{name} has been nominated #{mo.nominations.size} time(s) and has won #{awc.size} time(s)"
+  puts "#{name} has been nominated #{mo.nominations.size} time(s) for an Academy Award and has won #{awc.size} time(s)."
+  puts
   puts "#{name} has won the awards for:"
+  puts
+  puts string
+end
+
+#List all Academy award winners during the year specified by the User.
+def awards_by_year(year)
+  string = ""
+  nom_array = Nomination.all.where(year: year).where(win: 1)
+  nom_array.each {|nom| string = string + "#{nom.category_name}: #{Nominee.all.find(nom.nominee_id).name}\n"}
+  puts "The #{year} Academy Award winners were:"
+  puts
+  puts string
+end
+
+#Create suffix for formatting ceremony in output
+def suffix_find(ceremony)
+  array = ceremony.to_s.split("")
+  if array.last == "1"
+    "st"
+  elsif array.last == "2"
+    "nd"
+  elsif array.last == "3"
+    "rd"
+  else
+    "th"
+  end
+end
+
+#List all Academy award winners during the Oscar ceremony specified by the User.
+def awards_by_ceremony(ceremony)
+  string = ""
+  nom_array = Nomination.all.where(ceremony: ceremony).where(win: 1)
+  nom_array.each {|nom| string = string + "#{nom.category_name}: #{Nominee.all.find(nom.nominee_id).name}\n"}
+  suffix = suffix_find(ceremony)
+  puts "The #{ceremony}#{suffix} Academy Award winners were:"
+  puts
+  puts string
+end
+
+#List all the Academy Award winners for the category specified by the User.
+def awards_by_category(category_name)
+  string = ""
+  nom_array = Nomination.all.where(category_name: category_name).where(win: 1)
+  nom_array.each {|nom| string = string + "#{Nominee.all.find(nom.nominee_id).name} (#{nom.year})\n"}
+  puts "The Academy Award for Best #{category_name} has been awarded to the following:"
+  puts
   puts string
 end
