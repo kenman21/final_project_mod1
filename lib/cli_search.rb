@@ -1,5 +1,6 @@
 
 require 'pry'
+require 'search_methods'
 
 
 def run_search
@@ -40,10 +41,12 @@ def movie
     puts "Please enter a valid movie name."
   # else
     #return all wins and nominations for person
+    run_search
 end
 
 def winners
   #all winners
+  run_search
 end
 
 def year
@@ -51,7 +54,7 @@ def year
   user_input = gets.chomp.to_i
     if user_input.between?(1927,2015)
       puts "Hello"#all information pertaining to that year
-      run
+      run_search
     else
       puts "That year is not in our database. Would you like to try again or exit?"
       user_input = gets.downcase.strip
@@ -69,8 +72,8 @@ def category
   user_input = gets.downcase.chomp
   puts "Here is a list of every winner and nominee for the selected category:"
   #return list of winners and nominees for selected category
+  awards_by_category(user_input)
   run_search
-  binding.pry
 end
 
 def show_category
@@ -88,8 +91,4 @@ end
 def search
   puts "What would you like to search by?\n"
   puts "| Name | Movie | Winners | Year | Category | Main Menu | Exit |"
-end
-
-def exit
-  "Goodbye"
 end
