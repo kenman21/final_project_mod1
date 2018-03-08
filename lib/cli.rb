@@ -32,5 +32,5 @@ def exit_award
   puts "Goodbye!"
 end
 
-run
+
 "puts hi"
