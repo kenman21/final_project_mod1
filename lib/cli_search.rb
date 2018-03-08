@@ -1,21 +1,20 @@
 
 require 'pry'
-require 'search_methods'
 
 
 def run_search
-  search
+  search_options
   user_input = gets.downcase.strip
   if user_input == "name"
-    name
+    name_search
   elsif user_input == "movie"
-    movie
+    movie_search
   elsif user_input == "winners"
     winners
   elsif user_input == "year"
-    year
+    year_search
   elsif user_input == "category"
-    category
+    category_search
   elsif user_input == "main menu"
     run
   elsif user_input == "exit"
@@ -25,23 +24,40 @@ def run_search
   end
 end
 
-def name
+def name_search
   puts "What name would you like to search for?"
-  user_input = gets.downcase.chomp
-  #if database does not include name :
-    puts "Please enter a valid name."
-  # else
-    #return all wins and nominations for person
+  user_input = gets.chomp
+  all_names = Nominee.all.map {|nom| nom.name}
+  if all_names.include?(user_input)
+    n_print_wins(user_input)
+    run_search
+  else
+    puts "Please enter a valid name. Would  you like to try again or exit?"
+    user_input = gets.downcase.chomp
+    if user_input == "try again"
+      name_search
+    else
+      run_search
+    end
+  end
 end
 
-def movie
+def movie_search
   puts "What movie would you like to search for?"
-  user_input = gets.downcase.chomp
-  #if database does not include name:
-    puts "Please enter a valid movie name."
-  # else
-    #return all wins and nominations for person
+  user_input = gets.chomp
+  all_movies = Movie.all.map {|m| m.name}
+  if all_movies.include?(user_input)
+    m_print_wins(user_input)
     run_search
+  else
+    puts "Please enter a valid movie. Would  you like to try again or exit?"
+    user_input = gets.downcase.chomp
+    if user_input == "try again"
+      movie_search
+    else
+      run_search
+    end
+  end
 end
 
 def winners
@@ -49,31 +65,40 @@ def winners
   run_search
 end
 
-def year
+def year_search
   puts "What year (between 1927 - 2015) would you like to see?"
   user_input = gets.chomp.to_i
     if user_input.between?(1927,2015)
-      puts "Hello"#all information pertaining to that year
+      awards_by_year(user_input)
       run_search
     else
       puts "That year is not in our database. Would you like to try again or exit?"
       user_input = gets.downcase.strip
       if user_input == "try again"
-        year
-      elsif user_input == "exit"
+        year_search
+      else
         run_search
       end
   end
 end
 
-def category
+def category_search
   puts "Please enter the category you would like to see:\n"
-  show_category
-  user_input = gets.downcase.chomp
-  puts "Here is a list of every winner and nominee for the selected category:"
-  #return list of winners and nominees for selected category
-  awards_by_category(user_input)
-  run_search
+  all_categories = show_category
+  all_categories.sort.each {|cat| puts "#{cat}\n"}
+  user_input = gets.chomp
+  if all_categories.include?(user_input)
+    awards_by_category(user_input)
+    run_search
+  else
+    puts "That category is not in our database. Would you like to try again or exit?"
+    user_input = gets.downcase.strip
+    if user_input == "try again"
+      category_search
+    else
+      run_search
+    end
+  end
 end
 
 def show_category
@@ -81,14 +106,16 @@ def show_category
   Nomination.all.each do |nom|
     if category.include?(nom.category_name)
       next
+    elsif nom.category_name.first == '"'
+      next
     else
       category << nom.category_name
     end
   end
-  category.sort.each {|name| puts "#{name}\n"}
+  category
 end
 
-def search
+def search_options
   puts "What would you like to search by?\n"
   puts "| Name | Movie | Winners | Year | Category | Main Menu | Exit |"
 end
