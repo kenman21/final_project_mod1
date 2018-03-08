@@ -41,6 +41,7 @@ def n_print_wins(name)
   puts "His/her list of nominated movies includes:"
   puts
   puts string2
+  puts
 end
 
 #Retrieve all Movie entries matching the (name) entered by the User.
@@ -77,6 +78,7 @@ def m_print_wins(name)
   puts "#{name} has won the awards for:"
   puts
   puts string
+  puts
 end
 
 #List all Academy award winners during the year specified by the User.
@@ -87,10 +89,11 @@ def awards_by_year(year)
   puts "The #{year} Academy Award winners were:"
   puts
   puts string
+  puts
 end
 
 #Create suffix for formatting ceremony in output
-def suffix_find(ceremony)
+def suffix_find(ceremony_name)
   array = ceremony.to_s.split("")
   if array.last == "1"
     "st"
@@ -104,7 +107,7 @@ def suffix_find(ceremony)
 end
 
 #List all Academy award winners during the Oscar ceremony specified by the User.
-def awards_by_ceremony(ceremony)
+def awards_by_ceremony(ceremony_name)
   string = ""
   nom_array = Nomination.all.where(ceremony: ceremony).where(win: 1)
   nom_array.each {|nom| string = string + "#{nom.category_name}: #{Nominee.all.find(nom.nominee_id).name}\n"}
@@ -112,14 +115,16 @@ def awards_by_ceremony(ceremony)
   puts "The #{ceremony}#{suffix} Academy Award winners were:"
   puts
   puts string
+  puts
 end
 
 #List all the Academy Award winners for the category specified by the User.
-def awards_by_category(category_name)
+def awards_by_category(category_n)
   string = ""
-  nom_array = Nomination.all.where(category_name: category_name).where(win: 1)
+  nom_array = Nomination.all.where(category_name: category_n).where(win: 1)
   nom_array.each {|nom| string = string + "#{Nominee.all.find(nom.nominee_id).name} (#{nom.year})\n"}
-  puts "The Academy Award for Best #{category_name} has been awarded to the following:"
+  puts "The Academy Award for Best #{category_n} has been awarded to the following:"
   puts
   puts string
+  puts
 end
