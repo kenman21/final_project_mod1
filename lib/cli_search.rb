@@ -25,6 +25,7 @@ def run_search
 end
 
 def name_search
+  puts
   puts "What name would you like to search for?"
   user_input = gets.chomp
   all_names = Nominee.all.map {|nom| nom.name}
@@ -32,7 +33,7 @@ def name_search
     n_print_wins(user_input)
     run_search
   else
-    puts "Please enter a valid name. Would  you like to try again or exit?"
+    puts "Please enter a valid name. Would you like to try again or exit?"
     user_input = gets.downcase.chomp
     if user_input == "try again"
       name_search
@@ -43,6 +44,7 @@ def name_search
 end
 
 def movie_search
+  puts
   puts "What movie would you like to search for?"
   user_input = gets.chomp
   all_movies = Movie.all.map {|m| m.name}
@@ -66,6 +68,7 @@ def winners
 end
 
 def year_search
+  puts
   puts "What year (between 1927 - 2015) would you like to see?"
   user_input = gets.chomp.to_i
     if user_input.between?(1927,2015)
@@ -83,6 +86,7 @@ def year_search
 end
 
 def category_search
+  puts
   puts "Please enter the category you would like to see:\n"
   all_categories = show_category
   all_categories.sort.each {|cat| puts "#{cat}\n"}
@@ -116,6 +120,6 @@ def show_category
 end
 
 def search_options
-  puts "What would you like to search by?\n"
-  puts "| Name | Movie | Winners | Year | Category | Main Menu | Exit |"
+  puts "What would you like to search by?\n\n"
+  puts "| Name | Movie | Winners | Year | Category | Main Menu | Exit |\n\n"
 end

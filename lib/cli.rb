@@ -1,11 +1,13 @@
-require_relative 'cli_search'
-require_relative 'trivia'
-require_relative 'random_fact'
-require 'pry'
+# require_relative 'cli_search'
+# require_relative 'trivia'
+# require_relative 'random_fact'
+# require 'pry'
 
 def run
+  puts `clear`
   start_award
   user_input = gets.downcase.strip
+  puts 
   if user_input == "search"
     run_search
   elsif user_input == "trivia"
@@ -20,8 +22,8 @@ def run
 end
 
 def start_award
-  puts "Welcome to the Academy Awards! What would you like to do?\n"
-  puts "| Search | Trivia | Random Fact | Exit |"
+  puts "Welcome to the Academy Awards! What would you like to do?\n\n"
+  puts "| Search | Trivia | Exit |\n\n"
 end
 
 def exit_award
