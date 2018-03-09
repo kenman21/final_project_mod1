@@ -7,7 +7,7 @@ def run
   puts `clear`
   start_award
   user_input = gets.downcase.strip
-  puts 
+  puts
   if user_input == "search"
     run_search
   elsif user_input == "trivia"
@@ -17,6 +17,7 @@ def run
   elsif user_input == "exit"
     exit_award
   else puts "That's not a valid command. Please try again."
+    sleep 1
     run
   end
 end

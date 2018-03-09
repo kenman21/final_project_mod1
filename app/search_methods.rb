@@ -84,7 +84,7 @@ end
 #List all Academy award winners during the year specified by the User.
 def awards_by_year(year)
   string = ""
-  nom_array = Nomination.all.where(year: year).where(win: 1)
+  nom_array = Nomination.all.where(year: year-1).where(win: 1)
   nom_array.each {|nom| string = string + "#{nom.category_name}: #{Nominee.all.find(nom.nominee_id).name}\n"}
   puts "The #{year} Academy Award winners were:"
   puts
@@ -122,7 +122,7 @@ end
 def awards_by_category(category_n)
   string = ""
   nom_array = Nomination.all.where(category_name: category_n).where(win: 1)
-  nom_array.each {|nom| string = string + "#{Nominee.all.find(nom.nominee_id).name} (#{nom.year})\n"}
+  nom_array.each {|nom| string = string + "#{Nominee.all.find(nom.nominee_id).name} (#{nom.year+1})\n"}
   puts "The Academy Award for Best #{category_n} has been awarded to the following:"
   puts
   puts string
