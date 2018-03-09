@@ -49,7 +49,7 @@ def question_two
   random_year = Nomination.all.map {|nom| nom.year}.uniq
   random_year = random_year[49..random_year.size].sample
   puts "Here is your second question:\n"
-  puts "Which movie won Best Actress in a Leading Role in #{random_year+1}?\n\n"
+  puts "Who won Best Actress in a Leading Role in #{random_year+1}?\n\n"
   user_input = gets.chomp
   if random_year < 1976
     answer = Nominee.find(Nomination.all.where(year: random_year).where(category_name: "Actress").where(win: 1)[0].nominee_id).name
@@ -82,7 +82,7 @@ def question_three
   random_year = Nomination.all.map {|nom| nom.year}.uniq
   random_year = random_year[49..random_year.size].sample
   puts "Here is your third question:\n"
-  puts "Which movie won Best Actor in a Leading Role in #{random_year+1}?\n\n"
+  puts "Who won Best Actor in a Leading Role in #{random_year+1}?\n\n"
   user_input = gets.chomp
   if random_year < 1976
     answer = Nominee.find(Nomination.all.where(year: random_year).where(category_name: "Actor").where(win: 1)[0].nominee_id).name
@@ -115,10 +115,10 @@ def question_four
   random_year = Nomination.all.map {|nom| nom.year}.uniq
   random_year = random_year[9..random_year.size].sample
   puts "Here is your fourth question:\n"
-  puts "Which movie won Best Actress in a Supporting Role in #{random_year+1}?"
+  puts "Who won Best Actor in a Supporting Role in #{random_year+1}?"
   puts
   user_input = gets.chomp
-  answer = Nominee.find(Nomination.all.where(year: random_year).where(category_name: "Actress in a Supporting Role").where(win: 1)[0].nominee_id).name
+  answer = Nominee.find(Nomination.all.where(year: random_year).where(category_name: "Actor in a Supporting Role").where(win: 1)[0].nominee_id).name
   if user_input == answer
     puts "You are correct!"
     question_five
