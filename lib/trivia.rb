@@ -145,7 +145,7 @@ def question_five
   random_year = Nomination.all.map {|nom| nom.year}.uniq
   random_year = random_year[9..random_year.size].sample
   puts "Here is your last question:\n"
-  puts "Which movie won Best Actress in a Supporting Role in (year)?"
+  puts "Who won Best Actress in a Supporting Role in (year)?"
   puts
   user_input = gets.chomp
   answer = Nominee.find(Nomination.all.where(year: random_year).where(category_name: "Actress in a Supporting Role").where(win: 1)[0].nominee_id).name
