@@ -26,10 +26,10 @@ With this app, you'll be able to:
 
 
 
-##CONTRIBUTORS GUIDE
+## CONTRIBUTORS GUIDE
 
 https://github.com/kenman21/final_project_mod1/blob/master/CONTRIBUTING.md
 
-##LICENSE
+## LICENSE
 
 https://github.com/kenman21/final_project_mod1/blob/master/LICENSE.md
